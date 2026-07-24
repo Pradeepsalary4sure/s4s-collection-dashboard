@@ -21,6 +21,8 @@ const allowedOrigins = process.env.CLIENT_ORIGIN
   ? process.env.CLIENT_ORIGIN.split(",").map((origin) => origin.trim())
   : true;
 
+const path = require("path");
+
 app.use(cors({ origin: allowedOrigins }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -30,6 +32,18 @@ app.get("/health", (_req, res) => {
 });
 
 app.use("/api", dashboardRoutes);
+
+// Serve static assets from client/dist
+app.use(express.static(path.join(__dirname, "../client/dist")));
+
+// Fallback to index.html for client-side routing
+app.get("*", (req, res, next) => {
+  if (req.path.startsWith("/api")) {
+    return next();
+  }
+  res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+});
+
 app.use(notFoundHandler);
 app.use(errorHandler);
 
