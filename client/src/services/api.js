@@ -1,34 +1,53 @@
 import axios from "axios";
 
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL ||
+  "https://s4s-collection-dashboard.onrender.com/api";
+
+console.log("API URL:", API_BASE_URL);
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || "/api",
+  baseURL: API_BASE_URL,
   timeout: 20000,
 });
 
 function queryParams(filters) {
-  return Object.fromEntries(Object.entries(filters).filter(([, value]) => Boolean(value)));
+  return Object.fromEntries(
+    Object.entries(filters).filter(([, value]) => value !== undefined && value !== null && value !== "")
+  );
 }
 
 export async function getDashboard(filters, signal) {
-  const response = await api.get("/dashboard", { params: queryParams(filters), signal });
+  const response = await api.get("/dashboard", {
+    params: queryParams(filters),
+    signal,
+  });
+
   return response.data.data;
 }
 
 export async function downloadReport(format, filters) {
   const response = await api.get("/export", {
-    params: { ...queryParams(filters), format },
+    params: {
+      ...queryParams(filters),
+      format,
+    },
     responseType: "blob",
   });
-  const header = response.headers["content-disposition"] || "";
-  const match = header.match(/filename="?([^";]+)"?/i);
-  const filename = match ? match[1] : `s4s-collection-report.${format === "excel" ? "xls" : format}`;
-  const link = document.createElement("a");
-  const url = URL.createObjectURL(response.data);
 
-  link.href = url;
-  link.download = filename;
-  document.body.appendChild(link);
-  link.click();
-  link.remove();
-  URL.revokeObjectURL(url);
+  const header = response.headers["content-disposition"] || "";
+  const match = header.match(/filename="?([^"]+)"?/);
+
+  const filename =
+    match?.[1] ||
+    `s4s-collection-report.${format === "excel" ? "xlsx" : format}`;
+
+  const url = window.URL.createObjectURL(response.data);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  a.click();
+
+  window.URL.revokeObjectURL(url);
 }
