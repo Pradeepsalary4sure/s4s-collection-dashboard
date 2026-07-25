@@ -1,6 +1,13 @@
+import { ThemeProvider } from "./context/ThemeContext";
+import AnimatedBackground from "./components/ui/AnimatedBackground";
 import Dashboard from "./pages/Dashboard";
-import "./App.css";
 
 export default function App() {
-  return <Dashboard />;
+  return (
+    <ThemeProvider>
+      <AnimatedBackground />
+      <Dashboard />
+    </ThemeProvider>
+  );
 }
+
