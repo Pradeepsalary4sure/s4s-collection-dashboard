@@ -112,14 +112,14 @@ export default function Dashboard() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="space-y-5 pt-5"
+                className="dashboard-section space-y-5 pt-5"
               >
                 {/* Notice & Error alerts */}
                 {report.notice ? (
                   <motion.div
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="px-4 py-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs font-semibold text-amber-300"
+                    className="dashboard-notice px-4 py-3 rounded-lg bg-amber-50 border border-amber-200 text-xs font-semibold text-amber-700"
                   >
                     {report.notice}
                   </motion.div>
@@ -129,10 +129,10 @@ export default function Dashboard() {
                   <motion.div
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="px-4 py-3 rounded-xl bg-rose-500/10 border border-rose-500/20 text-xs font-semibold text-rose-300 flex items-center gap-2"
+                    className="dashboard-error px-4 py-3 rounded-lg bg-rose-50 border border-rose-200 text-xs font-semibold text-rose-700 flex items-center gap-2"
                   >
                     <span>Showing the last loaded report.</span>
-                    <span className="text-rose-400">{error}</span>
+                    <span className="text-rose-500">{error}</span>
                   </motion.div>
                 ) : null}
 
@@ -140,12 +140,10 @@ export default function Dashboard() {
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-3 rounded-xl bg-gray-900/90 backdrop-blur-xl border border-white/10 shadow-2xl"
+                    className="dashboard-refresh-badge fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-3 rounded-lg bg-white border border-gray-200 shadow-lg text-[10px] font-bold text-gray-600"
                   >
-                    <RefreshCw className="w-4 h-4 text-emerald-400 animate-spin" />
-                    <span className="text-xs font-semibold text-gray-300">
-                      Refreshing report
-                    </span>
+                    <RefreshCw className="w-4 h-4 text-emerald-500 animate-spin" />
+                    <span>Refreshing report</span>
                   </motion.div>
                 ) : null}
 
@@ -194,14 +192,14 @@ export default function Dashboard() {
                 {/* Summary + Footer */}
                 <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
                   <div className="lg:col-span-1">
-                    <SummaryCard summary={report.summary} />
+                    <SummaryCard summary={report.summary} date={report.filters.date} />
                   </div>
                   <div className="lg:col-span-3 flex items-end">
                     <motion.footer
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ delay: 0.5 }}
-                      className="w-full flex flex-col sm:flex-row justify-between gap-3 px-4 py-3 rounded-xl bg-white/5 border border-white/5 text-[10px] text-gray-500 font-medium"
+                      className="w-full flex flex-col sm:flex-row justify-between gap-3 px-4 py-3 rounded-[10px] bg-white border border-[#e9edf0] text-[10px] font-semibold text-[#7c8492]"
                     >
                       <span>
                         &copy; {new Date().getFullYear()} Salary 4 Sure. All

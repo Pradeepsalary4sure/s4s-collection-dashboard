@@ -1,8 +1,7 @@
 import axios from "axios";
 
 const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL ||
-  "https://s4s-collection-dashboard.onrender.com/api";
+  import.meta.env.VITE_API_BASE_URL || "/api";
 
 console.log("API URL:", API_BASE_URL);
 
@@ -50,4 +49,4 @@ export async function downloadReport(format, filters) {
   a.click();
 
   window.URL.revokeObjectURL(url);
-}
+} 

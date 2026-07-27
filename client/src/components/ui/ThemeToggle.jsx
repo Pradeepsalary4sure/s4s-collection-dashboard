@@ -11,7 +11,11 @@ export default function ThemeToggle({ className = "" }) {
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       onClick={toggleTheme}
-      className={`relative w-10 h-10 flex items-center justify-center rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/10 transition-colors ${className}`}
+      className={`relative w-10 h-10 flex items-center justify-center rounded-lg border transition-colors ${
+        isDark
+          ? "border-white/10 bg-white/5 hover:bg-white/10"
+          : "border-gray-200 bg-white hover:bg-gray-100 shadow-sm"
+      } ${className}`}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
     >
       <motion.div
@@ -22,12 +26,9 @@ export default function ThemeToggle({ className = "" }) {
         {isDark ? (
           <Moon className="w-4 h-4 text-emerald-400" />
         ) : (
-          <Sun className="w-4 h-4 text-amber-400" />
+          <Sun className="w-4 h-4 text-amber-500" />
         )}
       </motion.div>
-
-      {/* Glow */}
-      <span className={`absolute inset-0 rounded-xl blur-sm opacity-0 transition-opacity duration-300 ${isDark ? "bg-emerald-400/10" : "bg-amber-400/10"} group-hover:opacity-100`} />
     </motion.button>
   );
 }

@@ -31,7 +31,6 @@ export default function AnimatedBackground() {
       w = canvas.width = window.innerWidth;
       h = canvas.height = window.innerHeight;
 
-      // Reinitialize particles safely
       const count = Math.min(Math.floor((w * h) / 15000), 60);
       const newParticles = [];
       for (let i = 0; i < count; i++) {
@@ -39,7 +38,6 @@ export default function AnimatedBackground() {
       }
       particlesRef.current = newParticles;
 
-      // Blobs
       blobsRef.current = [
         { x: w * 0.2, y: h * 0.3, rx: w * 0.3, ry: h * 0.25, dx: 0.15, dy: 0.1, color1: "rgba(16, 185, 129,", color2: "rgba(5, 150, 105," },
         { x: w * 0.8, y: h * 0.7, rx: w * 0.25, ry: h * 0.35, dx: -0.1, dy: -0.08, color1: "rgba(59, 130, 246,", color2: "rgba(99, 102, 241," },
@@ -55,6 +53,10 @@ export default function AnimatedBackground() {
       ctx.clearRect(0, 0, w, h);
 
       const isDark = theme === "dark";
+
+      // Background fill
+      ctx.fillStyle = isDark ? "#0a100d" : "#f6f8f7";
+      ctx.fillRect(0, 0, w, h);
 
       // Draw gradient blobs
       blobsRef.current.forEach((blob) => {
@@ -92,7 +94,6 @@ export default function AnimatedBackground() {
         ctx.fillStyle = `hsla(${p.hue}, 70%, ${isDark ? "60%" : "50%"}, ${opacity})`;
         ctx.fill();
 
-        // Glow for dark mode
         if (isDark && p.size > 2) {
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.size * 3, 0, Math.PI * 2);
@@ -116,7 +117,7 @@ export default function AnimatedBackground() {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 w-full h-full pointer-events-none z-0"
-      style={{ background: theme === "dark" ? "#050b08" : "#f0faf4" }}
     />
   );
 }
+

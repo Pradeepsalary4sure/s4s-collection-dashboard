@@ -26,4 +26,3 @@ export function useLiveDateTime() {
 
   return { dateTime, time, date };
 }
-

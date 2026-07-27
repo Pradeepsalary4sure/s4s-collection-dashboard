@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Sparkles } from "lucide-react";
 import BankLogo from "../BankLogo";
 import { formatCurrency, formatReportDate } from "../../utils/formatters";
 
@@ -24,28 +25,27 @@ export default function CollectionTable({ rows, date }) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-      className="relative overflow-hidden rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 shadow-xl shadow-black/5"
+      className="collection-table relative overflow-hidden rounded-[9px] bg-white border border-[#e8edf0] shadow-[0_5px_18px_rgba(19,35,58,0.08)]"
     >
       {/* Header */}
-      <div className="relative overflow-hidden px-5 py-4 bg-gradient-to-r from-emerald-500/20 via-emerald-400/10 to-transparent border-b border-white/5">
-        <span className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 to-transparent" />
-        <h3 className="relative z-10 text-xs font-bold text-white tracking-wider uppercase text-center">
-          Collection Report &middot; {formatReportDate(date)}
+      <div className="relative overflow-hidden px-5 py-3 bg-gradient-to-r from-[#078f45] via-[#3bb828] to-[#55c334]">
+        <h3 className="relative z-10 text-xs font-black text-white uppercase tracking-wider text-center">
+          SALARY 4 SURE Collection Report &middot; {formatReportDate(date)}
         </h3>
       </div>
 
       {/* Table */}
       <div className="overflow-x-auto">
-        <table className="w-full min-w-[820px] border-collapse">
+        <table className="w-full min-w-[810px] border-collapse table-fixed">
           <thead>
-            <tr className="border-b border-white/5">
-              <th className="sticky top-0 z-10 py-3.5 px-4 text-left text-[10px] font-bold text-gray-400 uppercase tracking-widest bg-gray-900/80 backdrop-blur-xl border-b border-white/5 w-[19%]">
+            <tr>
+              <th className="py-3 px-4 text-left text-xs font-black text-[#172033] uppercase tracking-wider bg-[#fbfcfc] border-b border-[#e4e8ed] w-[20%]">
                 Bank Name
               </th>
-              {["S4S", "S4S Aman", "Rupee 1", "Total", "Total MTD"].map((header) => (
+              {["S4S", "S4S Aman", "Rupee 1", "Total", "Total MTD"].map((header, i) => (
                 <th
                   key={header}
-                  className="sticky top-0 z-10 py-3.5 px-4 text-right text-[10px] font-bold text-gray-400 uppercase tracking-widest bg-gray-900/80 backdrop-blur-xl border-b border-white/5 border-l border-white/5"
+                  className={`py-3 px-4 text-right text-xs font-black text-[#172033] uppercase tracking-wider bg-[#fbfcfc] border-b border-[#e4e8ed] border-l border-[#edf0f2] w-[16%]`}
                 >
                   {header}
                 </th>
@@ -65,49 +65,71 @@ export default function CollectionTable({ rows, date }) {
                   variants={rowVariants}
                   initial="hidden"
                   animate="visible"
-                  whileHover={{ backgroundColor: "rgba(255,255,255,0.03)" }}
-                  className={`
-                    border-b border-white/5 transition-colors
-                    ${isNaman ? "bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-transparent" : ""}
-                    ${isGrand ? "bg-gradient-to-r from-amber-500/15 via-yellow-500/10 to-transparent" : ""}
-                    ${row.kind === "subtotal" ? "bg-white/[0.02]" : ""}
-                  `}
+                  whileHover={{
+                    backgroundColor: isNaman ? "#e2e7ff" : "#f7fafc",
+                  }}
+                  className={`border-b border-[#e8ecef] transition-colors relative ${
+                    isNaman
+                      ? "bg-gradient-to-r from-[#d4daff] via-[#eeddff] to-[#fad4e8] border-y-2 border-purple-300/80 naman-row"
+                      : ""
+                  } ${isGrand ? "bg-[#fff9d7] grand-total-row" : ""} ${row.kind === "subtotal" && !isNaman ? "bg-gray-50 subtotal-row" : ""}`}
                 >
-                  <td className="py-3 px-4">
+                  {/* Bank Name column */}
+                  <td className="py-[7px] px-4 relative z-10">
                     {isBank ? (
                       <span className={`bank-badge ${bankClass(row.bank)}`}>
                         <BankLogo bank={row.bank} />
                         {row.bank}
                       </span>
                     ) : (
-                      <motion.span
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        className={`
-                          text-sm font-bold
-                          ${isNaman ? "bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent" : ""}
-                          ${isGrand ? "bg-gradient-to-r from-amber-300 via-yellow-300 to-amber-400 bg-clip-text text-transparent" : ""}
-                          ${!isNaman && !isGrand ? "text-white" : ""}
-                        `}
-                      >
-                        {row.bank}
-                      </motion.span>
+                      <span className="inline-flex items-center gap-1.5">
+                        {isNaman && (
+                          <motion.span
+                            animate={{ opacity: [0, 1, 0], scale: [0.5, 1.2, 0.5] }}
+                            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                          >
+                            <Sparkles className="w-3.5 h-3.5 text-purple-500" />
+                          </motion.span>
+                        )}
+                        <motion.span
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          className={`text-sm font-black ${
+                            isNaman
+                              ? "bg-gradient-to-r from-blue-600 via-purple-600 to-pink-500 bg-clip-text text-transparent"
+                              : ""
+                          } ${isGrand ? "text-[#10182d]" : ""} ${!isNaman && !isGrand ? "text-[#10182d]" : ""}`}
+                        >
+                          {row.bank}
+                        </motion.span>
+                      </span>
                     )}
                   </td>
+
+                  {/* Data columns */}
                   {["s4s", "s4sAman", "rupeeOne", "total", "totalMtd"].map((col) => {
                     const colorMap = {
-                      s4s: "text-emerald-400",
-                      s4sAman: "text-blue-400",
-                      rupeeOne: "text-purple-400",
-                      total: "text-amber-400",
-                      totalMtd: "text-cyan-400",
+                      s4s: "text-[#108e48]",
+                      s4sAman: "text-[#1769d7]",
+                      rupeeOne: "text-[#8a38d0]",
+                      total: "text-[#ed6b1a]",
+                      totalMtd: "text-[#145fcb]",
                     };
                     return (
                       <td
                         key={col}
-                        className={`py-3 px-4 text-right text-xs font-bold tabular-nums border-l border-white/5 ${colorMap[col]} ${isNaman ? "font-black" : ""} ${isGrand ? "font-black" : ""}`}
+                        className={`py-[7px] px-4 text-right text-xs tabular-nums border-l border-[#edf0f2] relative z-10 ${
+                          colorMap[col]
+                        } ${isGrand ? "!text-[#10182d]" : ""}`}
                       >
-                        {formatCurrency(row[col])}
+                        <motion.span
+                          key={row[col]}
+                          initial={isNaman ? { opacity: 0, y: 3 } : false}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          {formatCurrency(row[col])}
+                        </motion.span>
                       </td>
                     );
                   })}
@@ -117,9 +139,6 @@ export default function CollectionTable({ rows, date }) {
           </tbody>
         </table>
       </div>
-
-      {/* Glass reflection */}
-      <span className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-white/[0.02] to-transparent pointer-events-none" />
     </motion.section>
   );
 }

@@ -3,9 +3,9 @@ import { Menu, Search } from "lucide-react";
 import { useLiveDateTime } from "../../hooks/useLiveDateTime";
 import ThemeToggle from "../ui/ThemeToggle";
 import NotificationBell from "../ui/NotificationBell";
-import DateFilter from "../DateFilter";
-import MonthFilter from "../MonthFilter";
-import ExportButton from "../ExportButton";
+import DateFilter from "../ui/DateFilter";
+import MonthFilter from "../ui/MonthFilter";
+import ExportButton from "../ui/GlassExportButton";
 import { formatReportDate } from "../../utils/formatters";
 
 export default function Header({ filters, onDateChange, onMonthChange, onMenuClick }) {
@@ -16,17 +16,17 @@ export default function Header({ filters, onDateChange, onMonthChange, onMenuCli
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-      className="sticky top-0 z-30 flex items-center gap-3 px-4 md:px-6 py-3 md:py-4 border-b border-white/5 bg-gray-900/60 backdrop-blur-2xl"
+      className="dashboard-header sticky top-0 z-30 flex items-center gap-3 md:gap-5 px-4 md:px-7 py-4 md:py-[22px] border-b border-[#e5e9ed] bg-white/90 backdrop-blur-xl"
     >
       {/* Mobile menu */}
       <motion.button
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className="lg:hidden w-10 h-10 flex items-center justify-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors text-gray-400"
+        className="menu-button lg:hidden w-[38px] h-[38px] flex items-center justify-center rounded-lg hover:bg-[#eff4f1] transition-colors text-[#172033]"
         onClick={onMenuClick}
         aria-label="Open menu"
       >
-        <Menu className="w-4.5 h-4.5" />
+        <Menu className="w-[23px] h-[23px]" />
       </motion.button>
 
       {/* Title */}
@@ -35,24 +35,24 @@ export default function Header({ filters, onDateChange, onMonthChange, onMenuCli
           initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.1, duration: 0.4 }}
-          className="text-lg md:text-xl font-bold text-white tracking-tight truncate"
+          className="text-[clamp(19px,2vw,28px)] font-black text-[#07142b] tracking-tight leading-none truncate uppercase"
         >
           Collection Report
         </motion.h1>
-        <p className="text-xs text-gray-500 font-medium mt-0.5">
+        <p className="text-xs font-bold text-[#172033] mt-1">
           {formatReportDate(filters.date)}
         </p>
       </div>
 
       {/* Search (desktop) */}
-      <div className="hidden md:flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 border border-white/5 text-gray-400 min-w-[200px]">
+      <div className="header-search hidden md:flex items-center gap-2 px-3 py-2.5 rounded-lg bg-white border border-[#e2e8ed] text-gray-500 min-w-[180px] shadow-sm">
         <Search className="w-3.5 h-3.5" />
         <input
           type="text"
           placeholder="Search reports..."
-          className="flex-1 bg-transparent border-none outline-none text-xs text-white placeholder-gray-500 font-medium"
+          className="flex-1 bg-transparent border-none outline-none text-xs text-[#172033] placeholder-gray-400 font-bold"
         />
-        <kbd className="hidden lg:inline-flex text-[10px] text-gray-600 bg-white/5 px-1.5 py-0.5 rounded font-mono border border-white/5">
+        <kbd className="hidden lg:inline-flex text-[10px] text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded font-mono">
           ⌘K
         </kbd>
       </div>
@@ -62,26 +62,25 @@ export default function Header({ filters, onDateChange, onMonthChange, onMenuCli
       <MonthFilter value={filters.month} onChange={onMonthChange} />
 
       {/* Actions */}
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-3.5">
         <ExportButton filters={filters} />
         <NotificationBell count={0} />
         <ThemeToggle />
 
         {/* Live clock */}
-        <div className="hidden lg:flex flex-col items-end px-3 py-1.5 rounded-xl bg-white/5 border border-white/5">
-          <span className="text-xs font-semibold text-white tabular-nums">{time}</span>
-          <span className="text-[9px] text-gray-500 font-medium">{date}</span>
+        <div className="header-clock hidden lg:flex flex-col items-end px-3 py-1.5 rounded-lg bg-gray-50 border border-gray-200">
+          <span className="text-xs font-bold text-[#10182d] tabular-nums">{time}</span>
+          <span className="text-[9px] font-semibold text-gray-500">{date}</span>
         </div>
 
         {/* Profile */}
         <motion.div
           whileHover={{ scale: 1.05 }}
-          className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center shadow-lg shadow-emerald-500/20 cursor-pointer"
+          className="w-[38px] h-[38px] rounded-lg bg-gradient-to-br from-[#13a44f] to-[#07883b] flex items-center justify-center shadow-md shadow-[#13a44f]/30 cursor-pointer"
         >
-          <span className="text-xs font-bold text-white">AD</span>
+          <span className="text-xs font-black text-white">AD</span>
         </motion.div>
       </div>
     </motion.header>
   );
 }
-

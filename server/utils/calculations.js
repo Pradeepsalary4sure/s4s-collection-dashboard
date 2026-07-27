@@ -250,6 +250,7 @@ function getDashboardModel(sourceRows, filters = {}) {
       mtdCollection: grandTotalRow.totalMtd,
       cashfreeCollection: cashfree ? cashfree.total : 0,
       totalBanks: bankNames.length,
+      namanCollection: namedSubtotal.total,
     },
     table: displayRows,
     charts: {
