@@ -72,7 +72,7 @@ export default function CollectionTable({ rows, date }) {
                     isNaman
                       ? "bg-gradient-to-r from-[#d4daff] via-[#eeddff] to-[#fad4e8] border-y-2 border-purple-300/80 naman-row"
                       : ""
-                  } ${isGrand ? "bg-gradient-to-r from-[#078f45] via-[#3bb828] to-[#55c334] grand-total-row text-white" : ""} ${row.kind === "subtotal" && !isNaman ? "bg-gray-50 subtotal-row" : ""}`}
+                  } ${isGrand ? "bg-gradient-to-r from-[#078f45] via-[#3bb828] to-[#55c334] grand-total-row" : ""} ${row.kind === "subtotal" && !isNaman ? "bg-gray-50 subtotal-row" : ""}`}
                 >
                   {/* Bank Name column */}
                   <td className="py-[7px] px-4 relative z-10">
@@ -98,7 +98,7 @@ export default function CollectionTable({ rows, date }) {
                             isNaman
                               ? "bg-gradient-to-r from-blue-600 via-purple-600 to-pink-500 bg-clip-text text-transparent"
                               : ""
-                          } ${isGrand ? "text-white" : ""} ${!isNaman && !isGrand ? "text-[#10182d]" : ""}`}
+                          } ${isGrand ? "text-black text-base" : ""} ${!isNaman && !isGrand ? "text-[#10182d]" : ""}`}
                         >
                           {row.bank}
                         </motion.span>
@@ -119,7 +119,7 @@ export default function CollectionTable({ rows, date }) {
                       <td
                         key={col}
                         className={`py-[7px] px-4 text-right text-xs tabular-nums border-l border-[#edf0f2] relative z-10 ${
-                          isGrand ? "!text-white !font-black text-sm" : colorMap[col]
+                          isGrand ? "!text-black !font-black text-base" : colorMap[col]
                         }`}
                       >
                         <motion.span
