@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL || "/api";
+const API_BASE_URL = "/api";
      
 
 console.log("API URL:", API_BASE_URL);

@@ -10,7 +10,7 @@ export default defineConfig(({ mode }) => {
     server: {
       proxy: {
         "/api": {
-          target: env.VITE_API_PROXY_TARGET || "https://s4s-collection-dashboard.onrender.com/",
+          target: env.VITE_API_PROXY_TARGET || "http://localhost:5000",
           changeOrigin: true,
         },
       },  
