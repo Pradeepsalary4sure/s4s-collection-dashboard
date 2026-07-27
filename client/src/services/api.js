@@ -1,12 +1,11 @@
 import axios from "axios";
 
-const API_BASE_URL = "/api";
-     
+const VITE_API_BASE_URL = "/api";
 
-console.log("API URL:", API_BASE_URL);
+console.log("API URL:",VITE_API_BASE_URL);
 
 const api = axios.create({
-  baseURL: API_BASE_URL,
+  baseURL: VITE_API_BASE_URL,
   timeout: 20000,
 });
 

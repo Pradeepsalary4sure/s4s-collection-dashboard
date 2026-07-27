@@ -206,7 +206,7 @@ export default function Dashboard() {
                         rights reserved.
                       </span>
                       <span>
-                        Last updated: {formatDateTime(report.updatedAt)}
+                        created by pradeep : {}
                       </span>
                     </motion.footer>
                   </div>
