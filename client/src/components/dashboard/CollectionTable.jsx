@@ -29,7 +29,7 @@ export default function CollectionTable({ rows, date }) {
     >
       {/* Header */}
       <div className="relative overflow-hidden px-5 py-3 bg-gradient-to-r from-[#078f45] via-[#3bb828] to-[#55c334]">
-        <h3 className="relative z-10 text-xs font-black text-white uppercase tracking-wider text-center">
+        <h3 className="relative z-10 text-base font-black text-white uppercase tracking-wider text-center">
           SALARY 4 SURE Collection Report &middot; {formatReportDate(date)}
         </h3>
       </div>
@@ -72,7 +72,7 @@ export default function CollectionTable({ rows, date }) {
                     isNaman
                       ? "bg-gradient-to-r from-[#d4daff] via-[#eeddff] to-[#fad4e8] border-y-2 border-purple-300/80 naman-row"
                       : ""
-                  } ${isGrand ? "bg-[#fff9d7] grand-total-row" : ""} ${row.kind === "subtotal" && !isNaman ? "bg-gray-50 subtotal-row" : ""}`}
+                  } ${isGrand ? "bg-gradient-to-r from-[#078f45] via-[#3bb828] to-[#55c334] grand-total-row text-white" : ""} ${row.kind === "subtotal" && !isNaman ? "bg-gray-50 subtotal-row" : ""}`}
                 >
                   {/* Bank Name column */}
                   <td className="py-[7px] px-4 relative z-10">
@@ -98,7 +98,7 @@ export default function CollectionTable({ rows, date }) {
                             isNaman
                               ? "bg-gradient-to-r from-blue-600 via-purple-600 to-pink-500 bg-clip-text text-transparent"
                               : ""
-                          } ${isGrand ? "text-[#10182d]" : ""} ${!isNaman && !isGrand ? "text-[#10182d]" : ""}`}
+                          } ${isGrand ? "text-white" : ""} ${!isNaman && !isGrand ? "text-[#10182d]" : ""}`}
                         >
                           {row.bank}
                         </motion.span>
@@ -119,14 +119,15 @@ export default function CollectionTable({ rows, date }) {
                       <td
                         key={col}
                         className={`py-[7px] px-4 text-right text-xs tabular-nums border-l border-[#edf0f2] relative z-10 ${
-                          colorMap[col]
-                        } ${isGrand ? "!text-[#10182d]" : ""}`}
+                          isGrand ? "!text-white !font-black text-sm" : colorMap[col]
+                        }`}
                       >
                         <motion.span
                           key={row[col]}
                           initial={isNaman ? { opacity: 0, y: 3 } : false}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.3 }}
+                          className={isGrand ? "font-black" : ""}
                         >
                           {formatCurrency(row[col])}
                         </motion.span>

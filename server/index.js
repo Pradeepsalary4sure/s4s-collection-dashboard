@@ -148,13 +148,15 @@ app.use(notFoundHandler);
 app.use(errorHandler);
 
 // ==============================
-// Start Server
+// Start Server (only when run directly, not when imported as module)
 // ==============================
-app.listen(PORT, () => {
-  console.log("==================================");
-  console.log(`🚀 Server Running on Port ${PORT}`);
-  console.log(`🌐 http://localhost:${PORT}`);
-  console.log("==================================");
-});
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log("==================================");
+    console.log(`🚀 Server Running on Port ${PORT}`);
+    console.log(`🌐 http://localhost:${PORT}`);
+    console.log("==================================");
+  });
+}
 
 module.exports = app;
