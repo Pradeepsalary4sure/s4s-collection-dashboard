@@ -192,14 +192,18 @@ export default function CollectionTable({ rows, date }) {
         <table className="w-full min-w-[810px] border-collapse table-fixed">
           <thead>
             <tr>
-              <th className="py-3 px-4 text-left text-xs font-black text-[#172033] uppercase tracking-wider bg-gradient-to-r from-emerald-600 to-green-500 text-white border-b border-[#e4e8ed] w-[20%]">
-                Bank Name
+              <th className="py-4 px-4 text-left text-sm font-extrabold uppercase tracking-wider
+                  bg-gradient-to-r from-sky-100 via-cyan-100 to-blue-100
+                  text-slate-800 border-b border-sky-200 w-[20%]">
+                  Bank Name
               </th>
               {["S4S", "S4S Aman", "Rupee 1", "Total", "Total MTD"].map((header, i) => (
                 <th
-                  key={header}
-                  className={`py-3 px-4 text-right text-xs font-black text-[#172033] uppercase tracking-wider bg-gradient-to-r from-emerald-600 to-green-500 text-white border-b border-[#e4e8ed] border-l border-[#edf0f2] w-[16%]`}
-                >
+                    key={header}
+                    className="py-4 px-4 text-right text-sm font-extrabold uppercase tracking-wider
+                    bg-gradient-to-r from-sky-100 via-cyan-100 to-blue-100
+                    text-slate-800 border-b border-sky-200 border-l border-sky-100 w-[16%]"
+                  >
                   {header}
                 </th>
               ))}
