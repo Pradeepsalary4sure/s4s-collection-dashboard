@@ -288,7 +288,7 @@ const BANK_ALIASES = {
   "BANK OF BARODA": "BOB",
   "YES BANK": "YES BANK",
   "IDFC PAWANSUT": "IDFC",
-  "IDFC PAWAN SUT": "IDFC",
+  // "IDFC PAWAN SUT": "IDFC",
   "IDFC NEW": "IDFC NEW",
   CASHFREE: "Cashfree",
 };
