@@ -130,6 +130,7 @@
 
 // function normalizeRows(rows) {
 //   return rows.map((row) => {
+<<<<<<< HEAD
 //     const s4s = parseAmount(getField(row, ["S4S", "S4S Collection", "s4s", "s4s collection"]));
 //     const s4sAman = parseAmount(getField(row, ["S4S Aman", "S4S_Aman", "Aman", "aman", "S4S Aman Collection", "s4s aman", "s4s_aman"]));
 //     const rupeeOne = parseAmount(getField(row, ["Rupee 1", "Rupee1", "Rupee One", "Rupee 1 Collection", "rupee 1", "rupee1", "rupee one"]));
@@ -137,6 +138,17 @@
 //       date: parseSheetDate(getField(row, ["Date", "Collection Date", "Transaction Date", "Created At", "Date of Received", "Date of Update"])),
 //       bank: canonicalBankName(getField(row, ["Bank Name", "Bank", "Bankname"])),
 //       s4s,
+=======
+//     const s4s = parseAmount(getField(row, ["S4S", "S4S Collection"]));
+//     const s4sAman = parseAmount(getField(row, ["S4S Aman", "S4S_Aman", "Aman", "S4S Aman Collection"]));
+//     const rupeeOne = parseAmount(getField(row, ["Rupee 1", "Rupee1", "Rupee One", "Rupee 1 Collection"]));
+//     const statedTotal = parseAmount(getField(row, ["Total", "Amount", "Collection", "Amt Received"]));
+//     const calculatedTotal = s4s + s4sAman + rupeeOne;
+//     return {
+//       date: parseSheetDate(getField(row, ["Date", "Collection Date", "Transaction Date", "Created At", "Date of Received", "Date of Update"])),
+//       bank: canonicalBankName(getField(row, ["Bank Name", "Bank", "Bankname"])),
+//       s4s: calculatedTotal === 0 && statedTotal !== 0 ? statedTotal : s4s,
+>>>>>>> 20ab99bc6a7a9ba4182eb2aa8c0ad955d294fcfc
 //       s4sAman,
 //       rupeeOne,
 //     };
@@ -226,8 +238,12 @@
 //     normalizedRows.forEach((record) => {
 //       if (record.bank !== bank) return;
 //       if (record.date === selectedDate) addTotals(row, record);
+<<<<<<< HEAD
 //       // MTD: count only records up to and including the selected date
 //       if (record.date && record.date.startsWith(selectedMonth) && record.date <= selectedDate) {
+=======
+//       if (record.date && record.date.startsWith(selectedMonth)) {
+>>>>>>> 20ab99bc6a7a9ba4182eb2aa8c0ad955d294fcfc
 //         row.totalMtd += record.s4s + record.s4sAman + record.rupeeOne;
 //       }
 //     });
@@ -262,8 +278,11 @@
 
 // module.exports = { getDashboardModel, getSampleRows, isUsableCollectionSheet };
 
+<<<<<<< HEAD
 // module.exports = { getDashboardModel, getSampleRows, isUsableCollectionSheet };
 
+=======
+>>>>>>> 20ab99bc6a7a9ba4182eb2aa8c0ad955d294fcfc
 
 
 
