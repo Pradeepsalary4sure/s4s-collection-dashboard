@@ -4,6 +4,7 @@ import { RefreshCw } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Sidebar from "../components/layout/Sidebar";
 import Header from "../components/layout/Header";
+import AdminPage from "./AdminPage";
 import KpiCard from "../components/dashboard/KpiCard";
 import CollectionTable from "../components/dashboard/CollectionTable";
 import SummaryCard from "../components/dashboard/SummaryCard";
@@ -24,6 +25,7 @@ export default function Dashboard() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showAdmin, setShowAdmin] = useState(false); // NEW: Admin modal state
 
   useEffect(() => {
     const controller = new AbortController();
@@ -77,6 +79,7 @@ export default function Dashboard() {
           onDateChange={changeDate}
           onMonthChange={changeMonth}
           onMenuClick={() => setIsMenuOpen(true)}
+          onAdminClick={() => setShowAdmin(true)} // NEW: Pass admin click handler
         />
 
         <div className="flex-1 px-4 md:px-6 pb-6">
@@ -216,6 +219,9 @@ export default function Dashboard() {
           </AnimatePresence>
         </div>
       </main>
+
+      {/* Admin Modal */}
+      {showAdmin && <AdminPage onClose={() => setShowAdmin(false)} />}
     </div>
   );
-}
+} 

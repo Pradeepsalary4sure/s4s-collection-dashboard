@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
-import { Menu, Search } from "lucide-react";
+import { Menu, Search, LogOut, Users } from "lucide-react";
 import { useLiveDateTime } from "../../hooks/useLiveDateTime";
+import { useAuth } from "../../context/AuthContext";
 import ThemeToggle from "../ui/ThemeToggle";
 import NotificationBell from "../ui/NotificationBell";
 import DateFilter from "../ui/DateFilter";
@@ -8,8 +9,9 @@ import MonthFilter from "../ui/MonthFilter";
 import ExportButton from "../ui/GlassExportButton";
 import { formatReportDate } from "../../utils/formatters";
 
-export default function Header({ filters, onDateChange, onMonthChange, onMenuClick }) {
+export default function Header({ filters, onDateChange, onMonthChange, onMenuClick, onAdminClick }) {
   const { time, date } = useLiveDateTime();
+  const { user, logout } = useAuth();
 
   return (
     <motion.header
@@ -73,14 +75,36 @@ export default function Header({ filters, onDateChange, onMonthChange, onMenuCli
           <span className="text-[9px] font-semibold text-gray-500">{date}</span>
         </div>
 
-        {/* Profile */}
-        <motion.div
-          whileHover={{ scale: 1.05 }}
-          className="w-[38px] h-[38px] rounded-lg bg-gradient-to-br from-[#13a44f] to-[#07883b] flex items-center justify-center shadow-md shadow-[#13a44f]/30 cursor-pointer"
-        >
-          <span className="text-xs font-black text-white">AD</span>
-        </motion.div>
+        {/* Admin button - only for admins */}
+        {user?.role === "admin" && (
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={onAdminClick}
+            className="w-[38px] h-[38px] rounded-lg bg-purple-600 flex items-center justify-center shadow-md shadow-purple-600/30 cursor-pointer hover:bg-purple-700"
+            title="User Management"
+          >
+            <Users className="w-4 h-4 text-white" />
+          </motion.button>
+        )}
+
+        {/* Profile / Logout */}
+        <div className="flex items-center gap-2">
+          <span className="hidden md:inline text-xs font-bold text-gray-600">
+            {user?.email || "User"}
+          </span>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={logout}
+            className="w-[38px] h-[38px] rounded-lg bg-red-500 flex items-center justify-center shadow-md shadow-red-500/30 cursor-pointer hover:bg-red-600"
+            title="Logout"
+          >
+            <LogOut className="w-4 h-4 text-white" />
+          </motion.button>
+        </div>
       </div>
     </motion.header>
   );
 }
+

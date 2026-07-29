@@ -6,7 +6,7 @@ export default function BankLogo({ bank }) {
   // Custom SVGs for a highly premium, authentic look
   if (normalized.includes("hdfc")) {
     return (
-      <svg className="bank-logo-svg" viewBox="0 0 100 100" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg className="bank-logo-svg" viewBox="0 0 100 100" width="24" height="24" fill="none" xmlns="https://upload.wikimedia.org/wikipedia/commons/2/28/HDFC_Bank_Logo.svg">
         <rect width="100" height="100" rx="16" fill="#1C3F94" />
         <rect x="25" y="25" width="50" height="50" fill="white" />
         <rect x="36" y="36" width="28" height="28" fill="#1C3F94" />
@@ -17,7 +17,7 @@ export default function BankLogo({ bank }) {
 
   if (normalized.includes("icici")) {
     return (
-      <svg className="bank-logo-svg" viewBox="0 0 100 100" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg className="bank-logo-svg" viewBox="0 0 100 100" width="24" height="24" fill="none" xmlns="https://upload.wikimedia.org/wikipedia/commons/1/12/ICICI_Bank_Logo.svg">
         <rect width="100" height="100" rx="16" fill="#F37021" />
         <path d="M35 25H65M50 25V75M35 75H65" stroke="white" strokeWidth="12" strokeLinecap="round" strokeLinejoin="round" />
         <circle cx="50" cy="18" r="7" fill="#FFC20E" />

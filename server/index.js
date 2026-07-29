@@ -62,14 +62,13 @@ require("dotenv").config();
 console.log("PORT =", process.env.PORT);
 console.log("CSV_URL =", process.env.CSV_URL);
 
-// Uncomment when PostgreSQL is ready
-// require("./config/db");
-
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
+const cookieParser = require("cookie-parser");
 
 const dashboardRoutes = require("./routes/dashboardRoutes");
+const authRoutes = require("./routes/authRoutes");
 const {
   errorHandler,
   notFoundHandler,
@@ -94,10 +93,11 @@ app.use(
 );
 
 // ==============================
-// Body Parser
+// Body Parser & Cookie Parser
 // ==============================
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // ==============================
 // Health Check
@@ -113,6 +113,7 @@ app.get("/health", (req, res) => {
 // API Routes
 // ==============================
 app.use("/api", dashboardRoutes);
+app.use("/api/auth", authRoutes);
 
 // ==============================
 // Static Files (React Build)
